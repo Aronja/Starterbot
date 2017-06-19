@@ -5,7 +5,7 @@ from slackclient import SlackClient
 
 
 # starterbot's ID as an environment variable
-#BOT_ID = os.environ.get("BOT_ID")
+# BOT_ID = os.environ.get("BOT_ID")
 BOT_ID = "U5CB5DP1S"
 
 # constants
@@ -38,24 +38,11 @@ def handle_command(command, channel):
 
     elif command.startswith(Hello):
         response = "Hello! Nice to meet you."
-    # print command
 
-    elif command.startswith(Number):
-        a = random.randint(0, 10)
-        response = a
-
-#TODO make startbot ask for age, and give answer depending on age
-    elif command.startswith(how):
-        x = int(raw_input("How old are you"))
-        if x > 30:
-            response = "very old..."
-        else:
-            response = "You're still fresh"
-
-    #elif command.startswith(Numbers):
-
-    slack_client.api_call("chat.postMessage", channel=channel,
-                              text=response, as_user=True)
+    slack_client.api_call("chat.postMessage",
+                          channel=channel,
+                          text=response,
+                          as_user=True)
 
 # def askQuestion():
 #     if command.startswith(How):
@@ -83,7 +70,7 @@ def parse_slack_output(slack_rtm_output):
 
 
 if __name__ == "__main__":
-    READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
+    READ_WEBSOCKET_DELAY = 1  # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
         print("StarterBot connected and running!")
         while True:
